@@ -3,14 +3,27 @@ using namespace std;
 int knapsackNRec(int wt[], int cost[], int n, int k) {
 	if(n < 0 || k <= 0)
 		return 0;
-	int x1, x2, c;
-	x1 = x2 = c = 0;
-	if(wt[n] < k) {
-		c = k/wt[n];
-		x1 = c*cost[n] + knapsackNRec(wt, cost, n-1, k-c*wt[n]);
+	int i, x, c, max = 0;
+	c = k/wt[n];
+	for(i = 0; i <=c; ++i) {
+		x = i*cost[n] + knapsackNRec(wt, cost, n-1, k-i*wt[n]);
+		if(max < x)
+			max = x;
 	}
-	x2 = knapsackNRec(wt, cost, n-1, k);
-	return max(x1, x2);
+	return max;
+}
+
+int knapsackN(int wt[], int cost[], int n, int k) {
+	int i, j, x = 0, memo[k+1];
+	memset(memo, 0, (k+1)*sizeof(int));
+	for(i = 0; i <= k; ++i)
+		for(j = 0; j < n; ++j)
+			if(wt[j] <= i) {
+				x = cost[j] + memo[i-wt[j]];
+				if(memo[i] < x)
+					memo[i] = x;
+			}
+	return memo[k];
 }
 
 int main() {
@@ -21,6 +34,6 @@ int main() {
 		cin >> wt[i];
 	for(i = 0; i < n; ++i)
 		cin >> cost[i];
-	cout << knapsackNRec(wt, cost, n-1, k);
+	cout << knapsackN(wt, cost, n-1, k);
 	return 0;
 }

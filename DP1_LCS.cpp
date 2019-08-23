@@ -17,6 +17,24 @@ string lcsRec(string s1, string s2, int n1, int n2) {
     }
 }
 
+int LCScount(string s1, string s2) {
+    int i, j, n1 = s1.length(), n2 = s2.length();
+    vector<vector<int> > dp;
+    for(i = 0; i <= n1; ++i) {
+        vector<int> v(n2+1, 0);
+        dp.push_back(v);
+    }
+    for(i = 1; i <= n1; ++i) {
+        for(j = 1; j <= n2; ++j) {
+            if(s1[i-1] == s2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+    return dp[n1][n2];
+}
+
 string LCS(string s1, string s2, int n1, int n2) {
     string arr[n1+1][n2+1];
     int i, j, x1, x2;
@@ -47,6 +65,6 @@ int main() {
 	string s1, s2;
 	cin >> s1 >> s2;
     s1 = LCS(s1, s2, s1.length(), s2.length());
-    cout << s1;
+    cout << s1 << " " << LCScount(s1, s2);
 	return 0;
 }
