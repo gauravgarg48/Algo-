@@ -85,7 +85,8 @@ int main() {
 	g.addEdge(2, 4);
 	g.addEdge(3, 4);
 	g.addEdge(3, 5);
-	// g.bfs_shortest_path(0);
-	g.dfs(0);
+	g.print();
+	g.bfs_shortest_path(0);
+	// g.dfs(0);
 	return 0;
 }

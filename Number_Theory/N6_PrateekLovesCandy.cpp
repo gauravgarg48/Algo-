@@ -6,7 +6,8 @@ int main() {
     vector<int> primes;
     bool num[M+1];
     memset(num, true, sizeof(num));
-    for(i = 2; i <= M; ++i)
+    primes.push_back(2);
+    for(i = 3; i <= M; i+=2)
         if(num[i]) {
             primes.push_back(i);
             for(j = 2*i; j <= M; j += i)
@@ -18,5 +19,5 @@ int main() {
         cin >> n;
         cout << primes[n-1] << endl;
     }
-	return 0;
+    return 0;
 }

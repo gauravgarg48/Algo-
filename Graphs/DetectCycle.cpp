@@ -22,6 +22,7 @@ public:
 	}
 
 	bool isCycleBfs(T src) {
+		// Undirected graph
 		queue<T> q;
 		map<T, bool> visited;
 		map<T, int> parent;
@@ -59,6 +60,7 @@ public:
 	}
 
 	bool isCycleDfs() {
+		// Directed graph
 		map<T, bool> visited;
 		map<T, bool> instack;
 		bool isCycle;
